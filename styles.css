@@ -1,0 +1,89 @@
+:root {
+    --max-content-width: 800px;
+    --core-content-padding: 10px 60px;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: aliceblue;
+}
+.container {
+    width: 100vw;
+    /* height: 100vh; */
+    display: grid;
+    /* grid-template-rows: 200px 1fr; */
+    background-color: yellow;
+}
+.header-wrapper {
+    background-color: green;
+}
+.header {
+    width: var(--max-content-width);
+    justify-self: center;
+    padding: var(--core-content-padding);
+    background-color: pink;
+    display: flex;
+    justify-content: space-between;
+}
+.main-wrapper {
+    background-color: blue;
+}
+.main {
+    width: var(--max-content-width);
+    padding: var(--core-content-padding);
+    background-color: orange;
+    display: grid;
+    justify-self: center;
+    /* justify-content: center; */
+    border: 2px solid purple;
+}
+.card-container {
+    /* width: 100%; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-rows: 150px;
+    column-gap: 60px;
+    row-gap: 20px;
+    border: 3px solid black;
+}
+.card {
+    background-color: white;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+.card-inner {
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-upper {
+    border: 3px solid red;
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+}
+.card-book-title {
+    font-size: 20px;
+}
+.card-book-author {
+    margin-top: 2px;
+    font-size: 16px;
+}
+.card-book-pages {
+    margin-top: 5px;
+    font-size: 12px;
+}
+.card-lower {
+    border: 3px solid green;
+    display: flex;
+    gap: 10px;
+    justify-content: right;
+}
+.card-lower > p {
+    font-size: 14px;
+}
