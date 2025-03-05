@@ -33,7 +33,6 @@ class Library {
             }
         }
     }
-
 }
 
 class LibraryScreenRenderer {
@@ -42,6 +41,9 @@ class LibraryScreenRenderer {
     addBookBtn = document.getElementsByClassName("add-book-btn")[0];
     closeModalBtn = document.getElementById("closeModalBtn");
     addBookForm = document.getElementById("form-add-book");
+    formBookName = document.getElementById("form-book-name");
+    formAuthorName = document.getElementById("form-author-name");
+    formNumPages = document.getElementById("form-num-pages");
     constructor (library) {
         this.library = new Library();
         this.configureModalEventListeners();
@@ -119,7 +121,7 @@ class LibraryScreenRenderer {
         this.library.addBookToLibrary(newBook);
         this.addBookToPage(newBook);
     }
-    configureModalEventListeners() {
+    configureOpenCloseModalEventListeners() {
         this.addBookBtn.addEventListener('click', () => {
             this.openAddBookModal();
         });
@@ -131,10 +133,54 @@ class LibraryScreenRenderer {
                 this.closeAddBookModal();
             }
         });
+    }
+    configureBookNameValidation() {
+        this.formBookName.addEventListener('input', (event) => {
+            const maxBookNameLength = 100;
+            this.formBookName.setCustomValidity("");
+            if (this.formBookName.value.length > maxBookNameLength) {
+                this.formBookName.setCustomValidity(
+                    `Max length ${maxBookNameLength} characters (${this.formBookName.value.length} entered)`
+                );
+            }
+        });
+    }
+    configureAuthorNameValidation() {
+        this.formAuthorName.addEventListener('input', (event) => {
+            const maxAuthorNameLength = 100
+            this.formAuthorName.setCustomValidity("");
+            if (this.formAuthorName.value.length > maxAuthorNameLength) {
+                this.formAuthorName.setCustomValidity(
+                    `Max length ${maxAuthorNameLength} characters (${this.formAuthorName.value.length} entered)`
+                );
+            }
+        });
+    }
+    configureNumPagesValidation() {
+        this.formNumPages.addEventListener('input', (event) => {
+            this.formNumPages.setCustomValidity("");
+            if (this.formNumPages.value < 0) {
+                this.formNumPages.setCustomValidity(
+                    'Enter Value > 0'
+                );
+            }
+        });
+    }
+    configureModalFormValidationEventListeners() {
+        this.configureBookNameValidation();
+        this.configureAuthorNameValidation();
+        this.configureNumPagesValidation();
+    }
+    configureSubmitEventListener() {
         this.addBookForm.addEventListener('submit', (event) => {
             event.preventDefault();
             this.handleFormSubmission();
         });
+    }
+    configureModalEventListeners() {
+        this.configureOpenCloseModalEventListeners();
+        this.configureModalFormValidationEventListeners();
+        this.configureSubmitEventListener();
     }
 }
 
